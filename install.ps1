@@ -1,6 +1,6 @@
-﻿# exam-maker 한 번에 설치 (윈도우 PowerShell)
+# exam-maker 한 번에 설치 (윈도우 PowerShell)
 # 실행: irm https://raw.githubusercontent.com/seungyeon980808-pixel/exam-maker/main/install.ps1 | iex
-#   또는 저장소를 받은 뒤: powershell -ExecutionPolicy Bypass -File install.ps1 [-SkipLogin]
+#   또는 저장소를 받은 뒤: pwsh -File install.ps1 [-SkipLogin]   (이 파일은 BOM 없는 UTF-8이라 irm|iex·PowerShell 7에 맞춤)
 # 하는 일: Node·Python·Typst·Git 설치(없을 때만) → 파이썬 도구 → Codex·Claude 명령줄 → exam-maker 플러그인 → codex login → 설치 확인
 # 이미 있는 것은 건너뛰므로 여러 번 실행해도 된다. 시험 파일은 아무것도 내려받거나 올리지 않는다.
 param([switch]$SkipLogin)
