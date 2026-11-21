@@ -23,15 +23,20 @@
 ## 설치 (윈도우)
 [`skills/exam-maker/references/설치-windows.md`](skills/exam-maker/references/설치-windows.md) 를 따릅니다. 요약:
 ```powershell
-winget install OpenJS.NodeJS.LTS Python.Python.3.12 Typst.Typst Git.Git
+winget install OpenJS.NodeJS.LTS
+winget install Python.Python.3.12
+winget install Typst.Typst
+winget install Git.Git
 python -m pip install pymupdf pillow pyhwpx pywin32
 npm install -g @openai/codex
 codex login
 ```
-Claude 앱(Code 탭)에서:
-```
-/plugin marketplace add seungyeon980808-pixel/exam-maker
-/plugin install exam-maker@exam-maker
+
+스킬 설치(PowerShell):
+```powershell
+npm install -g @anthropic-ai/claude-code
+claude plugin marketplace add seungyeon980808-pixel/exam-maker
+claude plugin install exam-maker@exam-maker
 ```
 앱을 다시 시작한 뒤 「exam-maker 설치 확인해 줘」 → 「기말고사 출제를 시작하자」.
 

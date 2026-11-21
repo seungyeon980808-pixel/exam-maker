@@ -19,12 +19,17 @@ codex login
 ```
 `codex login`은 브라우저가 열리면 ChatGPT 계정으로 로그인한다.
 
-## 3. 스킬 설치 (Claude 앱 Code 탭에서)
+## 3. 스킬 설치 (PowerShell)
+```powershell
+npm install -g @anthropic-ai/claude-code
+claude plugin marketplace add seungyeon980808-pixel/exam-maker
+claude plugin install exam-maker@exam-maker
 ```
-/plugin marketplace add seungyeon980808-pixel/exam-maker
-/plugin install exam-maker@exam-maker
-```
-설치 뒤 Claude 앱을 다시 시작한다. 교육과정 MCP는 처음 연결될 때 자동으로 내려받는다(인터넷 필요, 1분 안쪽).
+(`claude` 명령은 설치에만 쓴다. 출제는 Claude 데스크톱 앱에서 한다.)
+설치 뒤 Claude 앱을 껐다 켠다. 교육과정 MCP는 처음 연결될 때 자동으로 내려받는다(인터넷 필요, 1분 안쪽).
+앱 입력창에서 `/plugin marketplace add seungyeon980808-pixel/exam-maker` → `/plugin install exam-maker@exam-maker` 로 해도 된다.
+
+**업데이트**: `claude plugin marketplace update exam-maker` 뒤 `claude plugin update exam-maker@exam-maker`, 앱 다시 시작.
 
 ## 4. 확인
 Claude에게 「exam-maker 설치 확인해 줘」라고 하면 `scripts/doctor.py`를 돌려 빠진 것을 알려 준다.

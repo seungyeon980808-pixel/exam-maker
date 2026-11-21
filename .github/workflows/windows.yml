@@ -3,6 +3,7 @@ on: [push, pull_request, workflow_dispatch]
 jobs:
   smoke:
     strategy:
+      fail-fast: false
       matrix:
         os: [windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
@@ -47,7 +48,4 @@ jobs:
           python $S/scripts/explain/make_explain.py $S/examples/sample/exam.json out/해설
           ls out/해설
       - name: 교육과정 MCP 실행기
-        run: |
-          printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"clientInfo":{"name":"ci","version":"1"}}}' > in.txt
-          timeout 120 node tools/curriculum-mcp.mjs < in.txt > mcp.out || true
-          grep -q korean-secondary-learning-map mcp.out
+        run: node tools/test_mcp.mjs
