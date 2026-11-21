@@ -41,6 +41,8 @@ if platform.system() == "Windows":
     line(hwp, "한글(한컴오피스) 설치", "" if hwp else "못 찾음 — 설치 위치가 다르면 무시해도 됨")
 else:
     print("ℹ️  윈도우가 아니라 한글 자동화(hwp→hwpx, 쪽 그림)는 건너뜁니다. hwpx 만들기는 됩니다.")
+fig = Path.home() / ".claude" / "plugins" / "marketplaces" / "5e-figure" / "figure.mjs"
+print(("✅" if fig.exists() else "ℹ️ ") + " 5E 그림 엔진(5e-figure) " + ("설치됨" if fig.exists() else "없음 → install.ps1을 다시 실행하면 같이 설치(없어도 gpt_image.py로 대신함)"))
 mcp = Path(os.environ.get("EXAM_MAKER_HOME", Path.home() / ".exam-maker")) / "curriculum-mcp" / "node_modules" / "korean-secondary-learning-map-mcp"
 print(("✅" if mcp.exists() else "ℹ️ ") + " 교육과정 MCP " + ("설치됨" if mcp.exists() else "아직 설치 전(Claude 앱이 처음 연결할 때 자동 설치)"))
 print("\n" + ("모두 준비됐습니다." if ok_all else "❌ 표시된 것을 설치한 뒤 다시 실행하세요."))

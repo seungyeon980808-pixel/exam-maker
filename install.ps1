@@ -1,7 +1,7 @@
 # exam-maker 한 번에 설치 (윈도우 PowerShell)
 # 실행: irm https://raw.githubusercontent.com/seungyeon980808-pixel/exam-maker/main/install.ps1 | iex
 #   또는 저장소를 받은 뒤: pwsh -File install.ps1 [-SkipLogin]   (이 파일은 BOM 없는 UTF-8이라 irm|iex·PowerShell 7에 맞춤)
-# 하는 일: Node·Python·Typst·Git 설치(없을 때만) → 파이썬 도구 → Codex·Claude 명령줄 → exam-maker 플러그인 → codex login → 설치 확인
+# 하는 일: Node·Python·Typst·Git 설치(없을 때만) → 파이썬 도구 → Codex·Claude 명령줄 → exam-maker·5e-figure 플러그인 → codex login → 설치 확인
 # 이미 있는 것은 건너뛰므로 여러 번 실행해도 된다. 시험 파일은 아무것도 내려받거나 올리지 않는다.
 param([switch]$SkipLogin)
 
@@ -49,7 +49,7 @@ if (Works 'codex' '--version') { Ok "codex $(codex --version)" } else { Warn "co
 if (-not (Works 'claude' '--version')) { npm install -g @anthropic-ai/claude-code 2>&1 | Out-Host; Refresh-Path }
 if (Works 'claude' '--version') { Ok "claude $(claude --version)" } else { Warn "claude 명령줄 설치 실패"; $fail += 'claude' }
 
-Step "4/6 exam-maker 플러그인"
+Step "4/6 exam-maker · 5e-figure(그림 엔진) 플러그인"
 $list = (claude plugin marketplace list 2>&1) -join "`n"
 if ($list -match 'exam-maker') { claude plugin marketplace update exam-maker 2>&1 | Out-Host }
 else { claude plugin marketplace add seungyeon980808-pixel/exam-maker 2>&1 | Out-Host }
@@ -58,6 +58,15 @@ if ($plugins -match 'exam-maker@exam-maker') { claude plugin update exam-maker@e
 else { claude plugin install exam-maker@exam-maker 2>&1 | Out-Host }
 $plugins = (claude plugin list 2>&1) -join "`n"
 if ($plugins -match 'exam-maker@exam-maker') { Ok "exam-maker 설치됨" } else { Warn "플러그인 설치 실패"; $fail += 'plugin' }
+# 그림 엔진(5e-figure)도 같이 설치
+$list = (claude plugin marketplace list 2>&1) -join "`n"
+if ($list -match '5e-figure') { claude plugin marketplace update 5e-figure 2>&1 | Out-Host }
+else { claude plugin marketplace add seungyeon980808-pixel/5e-figure 2>&1 | Out-Host }
+$plugins = (claude plugin list 2>&1) -join "`n"
+if ($plugins -match '5e-figure@5e-figure') { claude plugin update 5e-figure@5e-figure 2>&1 | Out-Host }
+else { claude plugin install 5e-figure@5e-figure 2>&1 | Out-Host }
+$plugins = (claude plugin list 2>&1) -join "`n"
+if ($plugins -match '5e-figure@5e-figure') { Ok "5e-figure(그림 엔진) 설치됨" } else { Warn "그림 엔진 설치 실패(그림은 GPT 대체 도구로 만듭니다)" }
 
 Step "5/6 교육과정 MCP 미리 받기"
 $root = Join-Path $HOME '.claude\plugins\marketplaces\exam-maker'
