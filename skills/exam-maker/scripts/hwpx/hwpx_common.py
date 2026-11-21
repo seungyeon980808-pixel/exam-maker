@@ -95,6 +95,17 @@ class Package:
         self.set_text("Contents/content.hpf", hpf)
         return iid
 
+    # 다른 도구가 hwp→hwpx 로 바꿀 때 남긴 「옛 hwp 에서 바꾼 문서」 표시.
+    # 새로 조판한 시험지에 남아 있으면 rhwp 같은 엔진이 옛 hwp 방식(키 큰 수식·글 줄 높이를 다시 재지 않음)으로 배치해
+    # 분수 줄이 아래 줄과 겹치고 상자 안 글이 넘친다. 한글은 이 파일을 쓰지 않는다.
+    CONVERSION_MARKS = ("META-INF/rhwp-hwp5-origin",)
+
+    def drop_conversion_marks(self) -> list:
+        gone = [n for n in self.CONVERSION_MARKS if n in self.files]
+        for n in gone:
+            del self.files[n]
+        return gone
+
     def save(self, out):
         out = Path(out)
         out.parent.mkdir(parents=True, exist_ok=True)

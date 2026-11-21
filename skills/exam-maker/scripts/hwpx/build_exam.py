@@ -588,6 +588,7 @@ def main(argv=None):
         del pkg.files["Preview/PrvImage.png"]
     if "Preview/PrvText.txt" in pkg.files:
         pkg.files["Preview/PrvText.txt"] = (meta.get("title") or "시험지").encode("utf-8")
+    pkg.drop_conversion_marks()
     pkg.save(a.out)
 
     nfig = sum(1 for n in pkg.files if n.startswith("BinData/"))

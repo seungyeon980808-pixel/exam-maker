@@ -184,6 +184,7 @@ def main(argv=None):
         del pkg.files["Preview/PrvImage.png"]
     if "Preview/PrvText.txt" in pkg.files:
         pkg.files["Preview/PrvText.txt"] = title.encode("utf-8")
+    pkg.drop_conversion_marks()
     pkg.save(a.out)
     print("만듦: %s" % Path(a.out).resolve())
     print("  " + summary)

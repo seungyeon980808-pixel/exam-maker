@@ -57,14 +57,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        how: [file-ps51, irm-ps51, irm-pwsh]
+        how: [file-pwsh, irm-ps51, irm-pwsh]
     steps:
       - uses: actions/checkout@v4
       - uses: typst-community/setup-typst@v4
-      - name: 한 번에 설치 (윈도우 PowerShell 5.1, 파일로)
-        if: matrix.how == 'file-ps51'
-        shell: powershell
-        run: powershell -ExecutionPolicy Bypass -File install.ps1 -SkipLogin
+      - name: 한 번에 설치 (PowerShell 7, 파일로)
+        if: matrix.how == 'file-pwsh'
+        shell: pwsh
+        run: pwsh -NoProfile -File install.ps1 -SkipLogin
       - name: 한 번에 설치 (README 명령 그대로, 윈도우 PowerShell 5.1)
         if: matrix.how == 'irm-ps51'
         shell: cmd
