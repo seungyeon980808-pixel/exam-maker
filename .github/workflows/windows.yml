@@ -1,0 +1,53 @@
+name: 윈도우에서 도구 돌려 보기
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  smoke:
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - uses: typst-community/setup-typst@v4
+      - run: python -m pip install pymupdf pillow
+      - name: 시험 보안 검사
+        run: python tools/guard.py
+      - name: 설치 확인 도구
+        run: python skills/exam-maker/scripts/doctor.py || true
+      - name: 코멘트판·비교 시안
+        run: |
+          S=skills/exam-maker
+          python $S/scripts/board/make_board.py $S/examples/sample/exam.json --out out/시안
+          python $S/scripts/board/make_board.py $S/examples/sample/exam.json --prev $S/examples/sample/exam.json --out out/시안2
+          test -s out/시안/index.html
+      - name: 코멘트 서버 저장·읽기
+        run: node skills/exam-maker/scripts/board/test_server.cjs out/시안
+      - name: 격리 세트·교육과정 자르기
+        run: |
+          S=skills/exam-maker
+          python $S/scripts/curriculum/cut_curriculum.py 생명과학 out/교육과정.txt --grep 염색체
+          python $S/scripts/check/make_check_set.py $S/examples/sample/exam.json out/검사 --curriculum out/교육과정.txt --level "고등학교 1학년"
+          test -s out/검사/Q01.md && test -s out/검사/지침_정답.md
+      - name: 한글 시험지·정답표 (기본 양식)
+        run: |
+          S=skills/exam-maker
+          python $S/scripts/hwpx/build_exam.py $S/examples/sample/exam.json $S/scripts/hwpx/templates/기본양식.hwpx out/시험지.hwpx
+          python $S/scripts/hwpx/build_answers.py $S/examples/sample/exam.json out/정답표.hwpx
+          test -s out/시험지.hwpx && test -s out/정답표.hwpx
+      - name: 해설지·검토 용지
+        run: |
+          S=skills/exam-maker
+          python $S/scripts/explain/make_explain.py $S/examples/sample/exam.json out/해설
+          ls out/해설
+      - name: 교육과정 MCP 실행기
+        run: |
+          printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"clientInfo":{"name":"ci","version":"1"}}}' > in.txt
+          timeout 120 node tools/curriculum-mcp.mjs < in.txt > mcp.out || true
+          grep -q korean-secondary-learning-map mcp.out

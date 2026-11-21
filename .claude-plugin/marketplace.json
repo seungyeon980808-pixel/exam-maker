@@ -1,0 +1,13 @@
+{
+  "name": "exam-maker",
+  "owner": { "name": "seungyeon980808-pixel" },
+  "plugins": [
+    {
+      "name": "exam-maker",
+      "source": "./",
+      "description": "학교 정기고사 출제 스킬 (코멘트판 시안 → 격리 풀이 검사 → 학교 양식 한글 시험지 → 해설지·검토 용지)",
+      "version": "0.1.0"
+    }
+  ],
+  "metadata": { "description": "학교 정기고사를 처음부터 함께 출제하는 Claude Code 스킬" }
+}

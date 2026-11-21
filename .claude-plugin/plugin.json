@@ -1,0 +1,9 @@
+{
+  "name": "exam-maker",
+  "version": "0.1.0",
+  "description": "학교 정기고사 출제 스킬: 대화·HTML 코멘트판으로 문항 확정 → GPT·Claude 격리 풀이·교육과정 대조 검사 → 학교 양식 한글(hwpx) 시험지·정답표 → 해설지·검토 용지. 교육과정 MCP 포함.",
+  "author": { "name": "seungyeon980808-pixel" },
+  "repository": "https://github.com/seungyeon980808-pixel/exam-maker",
+  "license": "MIT",
+  "keywords": ["exam", "시험", "출제", "hwpx", "한글", "교육과정"]
+}

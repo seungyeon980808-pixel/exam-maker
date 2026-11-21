@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "curriculum-kr-secondary": {
+      "command": "node",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/tools/curriculum-mcp.mjs"]
+    }
+  }
+}

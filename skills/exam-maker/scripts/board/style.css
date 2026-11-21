@@ -1,0 +1,53 @@
+:root { --ink:#111; --line:#222; --soft:#666; --bg:#ecebe6; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font-family:"HCR Batang","함초롬바탕","Batang","바탕","AppleMyungjo",serif; }
+.ui, .top, .side, .right, .q b, .pt, .meta { font-family:"Malgun Gothic","맑은 고딕","Apple SD Gothic Neo","Noto Sans KR",sans-serif; }
+.top { font-size:14px; color:#333; padding:16px 24px 6px; display:flex; gap:16px; align-items:center; flex-wrap:wrap; position:sticky; top:0; background:var(--bg); z-index:5; border-bottom:1px solid #d8d6cf; }
+.top button { font:inherit; font-size:13px; padding:5px 12px; border:1px solid #888; background:#fff; border-radius:6px; cursor:pointer; }
+.top button:hover { background:#f3f1ea; }
+#st { font-weight:700; } #st.ok { color:#2f6f4e; } #st.bad { color:#a24b2a; }
+.qwrap { display:grid; grid-template-columns:520px 1fr; background:#fff; box-shadow:0 1px 4px rgba(0,0,0,.14); margin:16px 24px 26px; max-width:1320px; }
+.qwrap.cmp { grid-template-columns:460px 460px 1fr; }
+.paper { padding:22px 22px 24px; font-size:16px; line-height:1.75; border-right:1px solid #ccc; }
+.paper.old { background:#f7f7f7; color:#555; }
+.tag { display:inline-block; font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif; font-size:12px; font-weight:700; padding:1px 8px; border-radius:10px; margin-bottom:8px; }
+.tag.old { background:#ddd; color:#444; } .tag.new { background:#ffe58a; color:#5a4500; }
+.right { display:flex; flex-direction:column; font-size:14px; }
+.sol { padding:14px 18px 10px; line-height:1.7; background:#f6fbf1; border-bottom:2px solid #222; }
+.sol h4 { margin:8px 0 2px; font-size:13.5px; } .sol h4:first-child { margin-top:0; } .sol p { margin:0 0 5px; }
+.sol .muted { color:#999; }
+.cms { display:grid; grid-template-columns:76px 1fr; }
+.cms .lab { font-size:12.5px; font-weight:700; color:#555; padding:9px 8px 0 12px; border-bottom:1px solid #e6e6e6; background:#fafaf7; }
+.cms .lab.all { color:#8a6d00; background:#fffbe9; }
+textarea { width:100%; min-height:52px; resize:vertical; border:none; border-bottom:1px solid #e6e6e6; border-left:1px solid #eee; background:#fff; padding:8px 10px; font:14.5px/1.55 "Malgun Gothic","Apple SD Gothic Neo",sans-serif; color:#1b1b1b; outline:none; }
+textarea[data-part="전체"] { background:#fffbe9; min-height:64px; }
+textarea:focus { background:#fffef5; box-shadow:inset 0 0 0 2px #e7d27a; }
+.q { text-indent:-1.55em; padding-left:1.55em; text-align:justify; margin:0 0 10px; }
+.q b { font-weight:800; }
+.pt { font-size:13px; }
+.pair { display:flex; align-items:center; justify-content:center; gap:10px; margin:8px 0 12px; }
+.solo { display:flex; justify-content:center; margin:8px 0 12px; }
+.solo img, .pair img { max-width:100%; }
+.cap { text-align:center; font-size:14px; margin:-6px 0 10px; }
+table.data { border-collapse:collapse; font-size:15px; line-height:1.45; }
+table.data th, table.data td { border:1px solid var(--line); padding:4px 8px; text-align:center; font-weight:normal; }
+table.data tr:first-child > * { border-top:1.8px solid var(--line); }
+table.data tr:last-child > * { border-bottom:1.8px solid var(--line); }
+table.data tr > :first-child { border-left:none; } table.data tr > :last-child { border-right:none; }
+.box { border:1px solid var(--line); padding:9px 12px; margin:8px 0 12px; font-size:15px; }
+.box p { margin:0 0 4px; }
+.talk p { text-indent:-2.6em; padding-left:2.6em; margin:0 0 4px; }
+.bogi { border:1px solid var(--line); margin:12px 0 10px; padding:16px 13px 6px; position:relative; }
+.bogi::before { content:"〈보 기〉"; position:absolute; top:-0.85em; left:50%; transform:translateX(-50%); background:#fff; padding:0 8px; }
+.paper.old .bogi::before { background:#f7f7f7; }
+.bogi p { margin:0 0 5px; text-indent:-1.35em; padding-left:1.35em; text-align:justify; }
+.choices { display:grid; grid-template-columns:repeat(5,auto); justify-content:space-between; }
+.choices.v { display:block; } .choices.v p { margin:0 0 4px; text-indent:-1.3em; padding-left:1.3em; }
+.choices.c3 { grid-template-columns:repeat(3,auto); justify-content:start; gap:2px 34px; }
+.essay { border:1px dashed #999; min-height:90px; margin-top:8px; }
+.frac { display:inline-flex; flex-direction:column; vertical-align:middle; text-align:center; line-height:1.25; margin:0 2px; text-indent:0; }
+.frac > span:first-child { border-bottom:1px solid currentColor; padding:0 3px; }
+.eq { display:block; text-align:center; text-indent:0; margin:3px 0 4px; }
+.paper i, .math i { font-family:"Times New Roman","Times",serif; font-size:1.06em; }
+.math { white-space:nowrap; }
+@media print { .top, .right { display:none; } .qwrap { grid-template-columns:1fr; box-shadow:none; } }

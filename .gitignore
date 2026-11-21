@@ -1,0 +1,14 @@
+# 시험 보안: 실제 시험 파일은 이 저장소에 절대 넣지 않는다.
+*.hwp
+*.hwpx
+!skills/exam-maker/scripts/hwpx/templates/기본양식.hwpx
+*.pdf
+*.docx
+*.xlsx
+*.pptx
+출제작업/
+작업/
+node_modules/
+__pycache__/
+.DS_Store
+Thumbs.db
