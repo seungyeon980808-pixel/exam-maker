@@ -49,3 +49,33 @@ jobs:
           ls out/해설
       - name: 교육과정 MCP 실행기
         run: node tools/test_mcp.mjs
+
+  install:
+    runs-on: windows-latest
+    env:
+      EXAM_MAKER_SKIP_LOGIN: '1'
+    strategy:
+      fail-fast: false
+      matrix:
+        how: [file-ps51, irm-ps51, irm-pwsh]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: typst-community/setup-typst@v4
+      - name: 한 번에 설치 (윈도우 PowerShell 5.1, 파일로)
+        if: matrix.how == 'file-ps51'
+        shell: powershell
+        run: powershell -ExecutionPolicy Bypass -File install.ps1 -SkipLogin
+      - name: 한 번에 설치 (README 명령 그대로, 윈도우 PowerShell 5.1)
+        if: matrix.how == 'irm-ps51'
+        shell: cmd
+        run: powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/install.ps1 | iex"
+      - name: 한 번에 설치 (irm | iex, PowerShell 7)
+        if: matrix.how == 'irm-pwsh'
+        shell: pwsh
+        run: irm "https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/install.ps1" | iex
+      - name: 플러그인이 깔렸는지
+        shell: pwsh
+        run: |
+          $p = (claude plugin list 2>&1) -join "`n"; Write-Host $p
+          if ($p -notmatch 'exam-maker@exam-maker') { exit 1 }
+          if (-not (Test-Path "$HOME\.exam-maker\curriculum-mcp\node_modules\korean-secondary-learning-map-mcp")) { Write-Host "MCP 미리 받기 안 됨"; exit 1 }

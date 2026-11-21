@@ -1,5 +1,21 @@
 # exam-maker — 학교 정기고사 함께 출제하기 (Claude Code 스킬)
 
+## 설치: Claude에게 이 링크만 주세요
+Claude 앱 → **Code** 탭 → 아무 폴더나 열고 이렇게 말하면 됩니다.
+```
+https://github.com/seungyeon980808-pixel/exam-maker 설치해 줘
+```
+
+> **Claude에게 (이 저장소 설치를 부탁받았을 때)**
+> 1. 운영체제를 확인한다. **윈도우**면 PowerShell에서 아래 한 줄을 실행한다(사용자에게 「설치 스크립트를 실행한다」고 한 줄 알리고 승인받는다):
+>    ```powershell
+>    powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/seungyeon980808-pixel/exam-maker/main/install.ps1 | iex"
+>    ```
+>    Node.js·Python·Typst·Git(없을 때만, winget) → 파이썬 도구 → Codex·Claude 명령줄 → 이 플러그인 → 교육과정 MCP → `codex login`(브라우저에서 ChatGPT 로그인) → 설치 확인까지 한다. 관리자 확인 창이 뜨면 사용자에게 「예」를 누르게 한다.
+>    「PowerShell을 다시 열고 한 번 더」라는 말이 나오면 같은 명령을 한 번 더 실행한다.
+> 2. **맥**이면: `brew install node python typst` → `python3 -m pip install pymupdf pillow` → `npm i -g @openai/codex @anthropic-ai/claude-code` → `claude plugin marketplace add seungyeon980808-pixel/exam-maker` → `claude plugin install exam-maker@exam-maker` → `codex login`.
+> 3. 끝나면 사용자에게 **Claude 앱을 완전히 껐다 켜라**고 안내하고, 다시 켠 뒤 「기말고사 출제를 시작하자」라고 말하면 된다고 알려 준다. 플러그인이 켜지면 `exam-maker` 스킬과 `curriculum-kr-secondary` MCP가 보인다.
+
 선생님과 Claude가 대화하며 중간·기말고사 한 세트를 처음부터 만드는 스킬입니다.
 
 ```
@@ -20,7 +36,7 @@
 | `scripts/figure` | 원본 그림 잘라 쓰기, GPT 그림 생성 |
 | `.mcp.json` | 교육과정 MCP(중·고 성취기준 3,838개) 자동 연결 |
 
-## 설치 (윈도우)
+## 손으로 설치하기 (윈도우)
 [`skills/exam-maker/references/설치-windows.md`](skills/exam-maker/references/설치-windows.md) 를 따릅니다. 요약:
 ```powershell
 winget install OpenJS.NodeJS.LTS
